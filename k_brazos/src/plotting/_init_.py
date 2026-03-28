@@ -1,6 +1,6 @@
 """
-Module: algorithms/__init__.py
-Description: Contiene las importaciones y modulos/clases públicas del paquete arms.
+Module: plotting/__init__.py
+Description: Contiene las importaciones y modulos/clases públicas del paquete plotting.
 
 Author: Luis Daniel Hernández Molinero
 Email: ldaniel@um.es
@@ -13,11 +13,7 @@ For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 """
 
 # Importación de módulos o clases
-from .algorithm import Algorithm
-from .epsilon_greedy import EpsilonGreedy
-from .ucb1 import UCB1
-from .softmax import Softmax
+from .plotting import plot_average_rewards, plot_optimal_selections
 
 # Lista de módulos o clases públicas
-__all__ = ['Algorithm', 'EpsilonGreedy', 'UCB1']
-
+__all__ = ['plot_average_rewards', 'plot_optimal_selections']

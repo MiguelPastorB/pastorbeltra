@@ -13,10 +13,8 @@ For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 """
 
 import numpy as np
-try:
-    from algorithms.algorithm import Algorithm
-except ImportError:
-    from .algorithm import Algorithm
+
+from algorithms.algorithm import Algorithm
 
 class EpsilonGreedy(Algorithm):
 
@@ -42,12 +40,6 @@ class EpsilonGreedy(Algorithm):
 
         # Observa que para para epsilon=0 solo selecciona un brazo y no hace un primer recorrido por todos ellos.
         # ¿Podrías modificar el código para que funcione correctamente para epsilon=0?
-        if self.epsilon == 0:
-            zeros = np.flatnonzero(self.counts == 0)
-            # Si epsilon es 0, y no han sido explorados todos los brazos
-            if zeros.size > 0:
-                chosen_arm = zeros[0]
-                return chosen_arm
 
         if np.random.random() < self.epsilon:
             # Selecciona un brazo al azar
@@ -57,7 +49,3 @@ class EpsilonGreedy(Algorithm):
             chosen_arm = np.argmax(self.values)
 
         return chosen_arm
-
-
-
-

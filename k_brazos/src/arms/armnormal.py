@@ -83,5 +83,3 @@ class ArmNormal(Arm):
         arms = [ArmNormal(mu, sigma) for mu in mu_values]
 
         return arms
-
-

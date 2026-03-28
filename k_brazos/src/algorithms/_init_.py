@@ -1,5 +1,5 @@
 """
-Module: arms/__init__.py
+Module: algorithms/__init__.py
 Description: Contiene las importaciones y modulos/clases públicas del paquete arms.
 
 Author: Luis Daniel Hernández Molinero
@@ -12,14 +12,9 @@ with the additional restriction that it may not be used for commercial purposes.
 For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 """
 
-
 # Importación de módulos o clases
-from .arm import Arm
-from .armnormal import ArmNormal
-from .armbinomial import ArmBinomial
-from .bandit import Bandit
+from .algorithm import Algorithm
+from .epsilon_greedy import EpsilonGreedy
 
 # Lista de módulos o clases públicas
-__all__ = ['Arm', 'ArmNormal', 'ArmBinomial', 'Bandit']
-
-
+__all__ = ['Algorithm', 'EpsilonGreedy']

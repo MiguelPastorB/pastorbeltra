@@ -18,7 +18,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from algorithms import Algorithm, EpsilonGreedy, UCB1, Softmax
+from algorithms import Algorithm, EpsilonGreedy
+
 
 def get_algorithm_label(algo: Algorithm) -> str:
     """
@@ -32,10 +33,6 @@ def get_algorithm_label(algo: Algorithm) -> str:
     label = type(algo).__name__
     if isinstance(algo, EpsilonGreedy):
         label += f" (epsilon={algo.epsilon})"
-    elif isinstance(algo, UCB1):
-        label += f" (c={algo.c})"
-    elif isinstance(algo, Softmax):
-        label += f" (temperature={algo.temperature})"
     # elif isinstance(algo, OtroAlgoritmo):
     #     label += f" (parametro={algo.parametro})"
     # Añadir más condiciones para otros algoritmos aquí
@@ -76,17 +73,4 @@ def plot_optimal_selections(steps: int, optimal_selections: np.ndarray, algorith
     :param algorithms: Lista de instancias de algoritmos comparados.
     """
 
-    sns.set_theme(style="whitegrid", palette="muted", font_scale=1.2)
-
-    plt.figure(figsize=(14, 7))
-    for idx, algo in enumerate(algorithms):
-        label = get_algorithm_label(algo)
-        plt.plot(range(steps), optimal_selections[idx], label=label, linewidth=2)
-
-    plt.xlabel('Pasos de Tiempo', fontsize=14)
-    plt.ylabel('Selecciones óptimas', fontsize=14)
-    plt.title('Selecciones óptimas vs Pasos de Tiempo', fontsize=16)
-    plt.legend(title='Algoritmos')
-    plt.tight_layout()
-    plt.show()
-
+    raise NotImplementedError("Esta función aún no ha sido implementada.")
