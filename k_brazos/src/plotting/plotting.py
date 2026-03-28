@@ -18,26 +18,22 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from algorithms import Algorithm, EpsilonGreedy
+from ..algorithms.algorithm import Algorithm
+from ..algorithms.epsilon_greedy import EpsilonGreedy
 
 
 def get_algorithm_label(algo: Algorithm) -> str:
-    """
-    Genera una etiqueta descriptiva para el algoritmo incluyendo sus parámetros.
-
-    :param algo: Instancia de un algoritmo.
-    :type algo: Algorithm
-    :return: Cadena descriptiva para el algoritmo.
-    :rtype: str
-    """
     label = type(algo).__name__
-    if isinstance(algo, EpsilonGreedy):
-        label += f" (epsilon={algo.epsilon})"
-    # elif isinstance(algo, OtroAlgoritmo):
-    #     label += f" (parametro={algo.parametro})"
-    # Añadir más condiciones para otros algoritmos aquí
-    else:
-        raise ValueError("El algoritmo debe ser de la clase Algorithm o una subclase.")
+    # Manejo de EpsilonGreedy y sus variantes
+    if hasattr(algo, 'epsilon'):
+        label += f" ($\epsilon$={algo.epsilon})"
+    # Manejo de UCB1 (suele usar un parámetro 'c')
+    if hasattr(algo, 'c'):
+        label += f" ($c$={algo.c})"
+    # Manejo de Softmax (usa temperatura)
+    if hasattr(algo, 'temperature'):
+        label += f" (temp={algo.temperature})"
+    
     return label
 
 
@@ -65,12 +61,30 @@ def plot_average_rewards(steps: int, rewards: np.ndarray, algorithms: List[Algor
 
 
 def plot_optimal_selections(steps: int, optimal_selections: np.ndarray, algorithms: List[Algorithm]):
-    """
-    Genera la gráfica de Porcentaje de Selección del Brazo Óptimo vs Pasos de Tiempo.
+    sns.set_theme(style="whitegrid", palette="muted")
+    plt.figure(figsize=(12, 6))
 
-    :param steps: Número de pasos de tiempo.
-    :param optimal_selections: Matriz de porcentaje de selecciones óptimas.
-    :param algorithms: Lista de instancias de algoritmos comparados.
-    """
+    for idx, algo in enumerate(algorithms):
+        plt.plot(range(steps), optimal_selections[idx], label=get_algorithm_label(algo))
 
-    raise NotImplementedError("Esta función aún no ha sido implementada.")
+    plt.xlabel('Pasos de Tiempo')
+    plt.ylabel('% Selección Brazo Óptimo')
+    plt.title('Rendimiento: Selección del Brazo Óptimo')
+    plt.legend()
+    plt.show()
+
+def plot_regret(steps: int, regret_accumulated: np.ndarray, algorithms: List[Algorithm], *args):
+    """
+    Genera la gráfica de Regret Acumulado vs Pasos de Tiempo[cite: 423].
+    """
+    sns.set_theme(style="whitegrid", palette="dark")
+    plt.figure(figsize=(12, 6))
+
+    for idx, algo in enumerate(algorithms):
+        plt.plot(range(steps), regret_accumulated[idx], label=get_algorithm_label(algo))
+
+    plt.xlabel('Pasos de Tiempo')
+    plt.ylabel('Regret Acumulado')
+    plt.title('Evolución del Rechazo (Regret) Acumulado')
+    plt.legend()
+    plt.show()

@@ -49,3 +49,20 @@ class EpsilonGreedy(Algorithm):
             chosen_arm = np.argmax(self.values)
 
         return chosen_arm
+
+class DecayingEpsilonGreedy(EpsilonGreedy):
+    def __init__(self, k, initial_epsilon=1.0):
+        # Empezamos explorando al máximo
+        super().__init__(k, initial_epsilon)
+        self.t = 0
+
+    def select_arm(self):
+        self.t += 1
+        # El valor de epsilon se reduce con el tiempo (1/t)
+        # Esto permite explorar mucho al principio y explotar al final
+        current_epsilon = 1.0 / self.t 
+        
+        if np.random.rand() < current_epsilon:
+            return np.random.randint(self.k)
+        else:
+            return np.argmax(self.values)
