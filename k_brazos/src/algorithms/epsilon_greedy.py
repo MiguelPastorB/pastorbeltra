@@ -51,18 +51,24 @@ class EpsilonGreedy(Algorithm):
         return chosen_arm
 
 class DecayingEpsilonGreedy(EpsilonGreedy):
-    def __init__(self, k, initial_epsilon=1.0):
-        # Empezamos explorando al máximo
+    def __init__(self, k, initial_epsilon=1.0, decay_rate=0.01):
         super().__init__(k, initial_epsilon)
+        self.initial_epsilon = initial_epsilon
+        self.decay_rate = decay_rate
         self.t = 0
+
+    def reset(self):
+        # Reiniciamos el contador de tiempo y el epsilon para que el algoritmo no sea demasiado agresivo
+        super().reset()
+        self.t = 0
+        self.epsilon = self.initial_epsilon
 
     def select_arm(self):
         self.t += 1
-        # El valor de epsilon se reduce con el tiempo (1/t)
-        # Esto permite explorar mucho al principio y explotar al final
-        current_epsilon = 1.0 / self.t 
+        # Usamos un decaimiento más suave para dar tiempo a explorar
+        self.epsilon = self.initial_epsilon / (1 + self.decay_rate * self.t)
         
-        if np.random.rand() < current_epsilon:
+        if np.random.rand() < self.epsilon:
             return np.random.randint(self.k)
         else:
             return np.argmax(self.values)
