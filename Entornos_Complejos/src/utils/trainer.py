@@ -62,3 +62,61 @@ def train_tabular_agent(agent, n_episodes, seed=None):
         steps_history.append(steps)
         
     return rewards_history, steps_history
+
+def train_approximate_agent(env, agent, n_episodes):
+    """Orquesta el entrenamiento para agentes de Deep RL."""
+    rewards_history = []
+    
+    for episode in range(n_episodes):
+        state, _ = env.reset()
+        total_reward = 0
+        done = False
+        
+        while not done:
+            action = agent.get_action(state)
+            next_state, reward, terminated, truncated, _ = env.step(action)
+            done = terminated or truncated
+            
+            # Guardar en memoria y actualizar
+            agent.memory.append((state, action, reward, next_state, done))
+            agent.update()
+            
+            state = next_state
+            total_reward += reward
+            
+        rewards_history.append(total_reward)
+        # Sincroniza red target cada 10 episodios
+        if episode % 10 == 0:
+            agent.target_net.load_state_dict(agent.policy_net.state_dict())
+            
+    return rewards_history
+
+def train_sarsa_approximate(env, agent, n_episodes):
+    """Orquesta el entrenamiento para SARSA semi-gradiente."""
+    rewards_history = []
+    
+    for episode in range(n_episodes):
+        state, _ = env.reset()
+        total_reward = 0
+        done = False
+        
+        # Elegimos la acción inicial
+        action = agent.get_action(state)
+        
+        while not done:
+            next_state, reward, terminated, truncated, _ = env.step(action)
+            done = terminated or truncated
+            
+            # Elegimos la siguiente acción (On-policy)
+            next_action = agent.get_action(next_state)
+            
+            # Actualización del agente
+            agent.update(state, action, reward, next_state, next_action, done)
+            
+            state = next_state
+            action = next_action
+            total_reward += reward
+            
+        rewards_history.append(total_reward)
+            
+    return rewards_history
