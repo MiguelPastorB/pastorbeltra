@@ -12,7 +12,7 @@ def get_algorithm_label(algo: Algorithm) -> str:
     label = type(algo).__name__
     # Manejo de EpsilonGreedy y sus variantes
     if hasattr(algo, 'epsilon'):
-        label += f" ($\epsilon$={algo.epsilon})"
+        label += f" ($epsilon$={algo.epsilon})"
     # Manejo de UCB1 (suele usar un parámetro 'c')
     if hasattr(algo, 'c'):
         label += f" ($c$={algo.c})"
