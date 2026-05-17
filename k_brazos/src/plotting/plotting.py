@@ -1,17 +1,3 @@
-"""
-Module: plotting/plotting.py
-Description: Contiene funciones para generar gráficas de comparación de algoritmos.
-
-Author: Luis Daniel Hernández Molinero
-Email: ldaniel@um.es
-Date: 2025/01/29
-
-This software is licensed under the GNU General Public License v3.0 (GPL-3.0),
-with the additional restriction that it may not be used for commercial purposes.
-
-For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
-"""
-
 from typing import List
 
 import numpy as np
@@ -75,7 +61,7 @@ def plot_optimal_selections(steps: int, optimal_selections: np.ndarray, algorith
 
 def plot_regret(steps: int, regret_accumulated: np.ndarray, algorithms: List[Algorithm], *args):
     """
-    Genera la gráfica de Regret Acumulado vs Pasos de Tiempo[cite: 423].
+    Genera la gráfica de Regret Acumulado vs Pasos de Tiempo.
     """
     sns.set_theme(style="whitegrid", palette="dark")
     plt.figure(figsize=(12, 6))

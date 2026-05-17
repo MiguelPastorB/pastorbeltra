@@ -11,29 +11,23 @@ Este repositorio tiene como objetivo agrupar los ficheros de código fuente refe
 
 ## Estructura
 pastorbeltra (github)
-|__ informe.pdf # Informe técnico (se espera no más de 10 folios de contenido)
+|__ informe.pdf # Informe técnico
 |__ main.ipynb # Fichero principal que accede a los distintos main.ipynb de cada parte
+|__ README.md # Breve introducción del problema y estructura del proyecto
 |__ k_brazos
-| |__ src/ # Código .py (expanda src, o considere varios src con distintos nombres)
-| |__ docs/ # Documentación ( .bib, .pdf, ... si procede)
-| |__ tests/ # Tests (si aplica)
-| |__ data/ # Datos necesarios (si aplica)
-| |__ README.md # Breve introducción del problema y enlace a los estudios.
+| |__ src/ # Código .py 
 | |__ main.ipynb # Fichero principal de esta parte
-| |__ notebook1.ipynb # P.e. presentación de métodos epsilon-greedy
-| |__ etc.ipynb # Recuerde poner tantos como estudios realizados
+| |__ Bernoulli.ipynb # Estudio del problema de k-brazos mediante recompensas Bernoulli
+| |__ Binomial.ipynb # Estudio del problema de k-brazos mediante recompensas Binomial
+| |__ Normal.ipynb # Estudio del problema de k-brazos mediante recompensas Normal
 |__ Entornos_Complejos
-| |__ src/ # Código .py (expanda src, o considere varios src con distintos nombres)
-| |__ docs/ # Documentación ( .bib, .pdf, ... si procede)
-| |__ tests/ # Tests (si aplica)
-| |__ data/ # Datos necesarios (si aplica)
-| |__ README.md # Breve introducción del problema y enlace a los estudios.
+| |__ src/ # Código .py
 | |__ main.ipynb # Fichero principal de esta parte
-| |__ notebook1.ipynb # P.e. presentación de métodos tabulares
-| |__etc.ipynb # Recuerde poner tantos como estudios realizados
+| |__ Approximate.ipynb # Estudio del problema entornos complejos mediante métodos de aproximación
+| |__ Tabular.ipynb # Estudio del problema entornos complejos mediante métodos tabulares
 
 ## Instalación y Uso
-...
+Ejecutar el notebook main.ipynb para instalar las dependencias. El resto de notebooks funcionarán correctamente al instalar estas dependencias.
 
 ## Tecnologías Utilizadas
 Python, Google Collab
